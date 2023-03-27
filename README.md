@@ -15,6 +15,6 @@ E-Gym consists of four main layers: the presentation layer, the business logic l
 -Eshop.Web: responsible for handling incoming requests and generating responses to be sent back to the user. The web layer communicates with the services layer to perform business logic and retrieve data, and then generates a response to be sent back to the user.
 
 ---
-#Main page with some products added
+# Main page with some products added
 
 ![image](https://user-images.githubusercontent.com/83420035/228055201-9409ca27-62c6-43fc-8e5b-b839984c43c1.png)
