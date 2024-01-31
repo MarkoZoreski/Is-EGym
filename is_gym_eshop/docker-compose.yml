@@ -1,0 +1,36 @@
+version: '3.7'
+
+networks:
+  eshop_network:
+
+services:
+  sql_server:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "marko@123"
+    ports:
+      - "1433:1433"
+    networks:
+      - eshop_network
+    volumes:
+      - ./mssql_data:/var/opt/mssql/data
+
+  eshop_web:
+    image: eshop.web
+    build:
+      context: .
+      dockerfile: Eshop.Web/Dockerfile
+    environment:
+      - DB_HOST=sql_server
+      - DB_NAME=GymAPP
+      - DB_SA_PASSWORD=marko@123
+    ports:
+      - "8080:80"
+    depends_on:
+      - sql_server
+    networks:
+      - eshop_network
+
+volumes:
+  mssql_data:
