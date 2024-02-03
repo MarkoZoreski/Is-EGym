@@ -5,10 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["Eshop.Web/Eshop.Web.csproj", "Eshop.Web/"]
-COPY ["Eshop.Domain/Eshop.Domain.csproj", "Eshop.Domain/"]
-COPY ["Eshop.Service/Eshop.Service.csproj", "Eshop.Service/"]
-COPY ["Eshop.Repository/Eshop.Repository.csproj", "Eshop.Repository/"]
+COPY .
 RUN dotnet restore "Eshop.Web/Eshop.Web.csproj"
 COPY . .
 WORKDIR "/src/Eshop.Web"
