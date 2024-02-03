@@ -31,7 +31,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./is_gym_eshop/Eshop.Web
           push: true
           tags: marki4/kiii:latest
       - name: Image digest
