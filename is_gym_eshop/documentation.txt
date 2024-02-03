@@ -1,0 +1,8 @@
+build image
+docker build -t eshop.web -f Eshop.Web/Dockerfile .
+
+run container and expose on port
+docker run -d --name eshop_web_container -p 8080:80 eshop.web
+
+run orchestration
+docker-compose up -d
