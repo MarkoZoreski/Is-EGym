@@ -19,4 +19,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:eshop_web
