@@ -31,8 +31,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./is_gym_eshop/Eshop.Web
+          context: "{{defaultContext}}:./is_gym_eshop/Eshop.Web"
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii-project:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
