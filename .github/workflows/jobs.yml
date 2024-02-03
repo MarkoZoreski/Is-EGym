@@ -13,22 +13,25 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
       - name: Build and push Docker Image
+        id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./is_gym_eshop/Eshop.Web/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:latest, ${{ secrets.DOCKERHUB_USERNAME }}/kiii:${{ github.run_number }}
+          tags: marki4/kiii:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
