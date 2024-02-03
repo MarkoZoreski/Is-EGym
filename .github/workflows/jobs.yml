@@ -33,6 +33,6 @@ jobs:
         with:
           context: ./is_gym_eshop/Eshop.Web
           push: true
-          tags: marki4/kiii:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii-project:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
