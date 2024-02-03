@@ -31,3 +31,4 @@ jobs:
           context: .
           file: ./is_gym_eshop/Eshop.Web/Dockerfile
           push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:latest, ${{ secrets.DOCKERHUB_USERNAME }}/kiii:${{ github.run_number }}
