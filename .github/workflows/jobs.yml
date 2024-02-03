@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["KIII"]
+  pull_request:
+    branches: ["KIII"]
+
+concurrency:
+  group: build-and-release
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+      - name: Build and push Docker Image
+        uses: docker/docker-build-push@v4
+        with:
+          image: marki4/kiii
+          registry: docker.io 
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
