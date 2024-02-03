@@ -6,28 +6,18 @@ on:
   pull_request:
     branches: ["main"]
 
-concurrency:
-  group: build-and-release
-
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push Docker Image
-        id: docker_build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v2
         with:
           context: "{{defaultContext}}:/is_gym_eshop/Eshop.Web"
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/kiii:latest
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
