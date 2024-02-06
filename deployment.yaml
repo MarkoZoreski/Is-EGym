@@ -6,7 +6,7 @@ metadata:
 data:
   DB_HOST: sql_server
   DB_NAME: GymAPP
-  DB_SA_PASSWORD: marko@123
+  DB_SA_PASSWORD: password
 ---
 apiVersion: v1
 kind: Secret
@@ -15,7 +15,7 @@ metadata:
   namespace: kiii
 type: Opaque
 data:
-  SA_PASSWORD: bWFya28rMTIz
+  password: cG9zdGdyZXM=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,8 +34,8 @@ spec:
     spec:
       containers:
         - name: eshop-web
-          image: eshop-web
-          imagePullPolicy: Always
+          image: 192.168.49.2:80/marki4/eshop_web 
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

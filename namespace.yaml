@@ -1,19 +1,6 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: eshop-web-ingress
-  namespace: kiii
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
-spec:
-  rules:
-    - host: 
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: eshop-web-service
-                port:
-                  number: 80
+  name: kiii
+  labels:
+    name: kiii
